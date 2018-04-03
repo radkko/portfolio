@@ -12,7 +12,7 @@ body{
 }
 .menu_header{
     height: 80px;
-    display: grid;
+    display: grid; 
     grid-template-columns:repeat(6, 16.66%);
     padding: 20px 5% 0 5%;
     background:rgba(0, 0, 0, 0.897);
@@ -29,24 +29,22 @@ body{
     height: inherit;
     overflow: hidden;
 }
-.slider{
-    position: absolute;
-    width: 100%;
-    height: 100vh;
-    float: left;
-}
 #slider1{
     background: url(img/slider1.jpeg);
     background-size: cover;
-    left:0;
-    
 }
 #slider2{
     background: url(img/slider2.jpeg);
     background-size: cover;
-    left:100%;
 }
-
+#slider3{
+    background: url(img/slider1.jpeg);
+    background-size: cover;
+}
+#slider4{
+    background: url(img/slider2.jpeg);
+    background-size: cover;
+}
 .content{
     height: 100vh;
     
