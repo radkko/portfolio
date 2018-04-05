@@ -18,29 +18,37 @@ function sliderInit(sliders){
  }
 }
 sliderInit(4);
-moveLeft();
+requestAnimationFrame(moveLeft);
 
 /* PRZESUWANE SLIDERA */
-function moveLeft(){
-    let start_time = Date.now(); 
-    let interval = setInterval( function() {
-    let passed_time = Date.now() - start_time;
+function moveLeft(time){
+    console.log(time);
+    let start_time = Date.now();
+    let el_left = [];
     let sliders = document.querySelectorAll("div[class=slider]");
-    let last = sliders[sliders.length-1];
+    for(let i = 1; i <=sliders.length; i++){
+        el_left[i-1] = document.getElementById("slider" + i).offsetLeft;
+    }
+   // console.log(el_left);
+
+    let interval = setInterval( function() {
+    let passed_time = (Date.now() - start_time) / 1000 ;
+    console.log(passed_time);
+    if (passed_time > 1) passed_time = 1;   
+    
     for(let i=1; i <= sliders.length; i++){
         let el = document.getElementById("slider" + i);
-        el.style.left = el.offsetLeft - (passed_time / 100) + "px" ;
+        el.style.left = el_left[i-1] - (passed_time * el.offsetWidth) + "px" ;
         if((el.offsetLeft + el.offsetWidth) <= 0){
            clearInterval(interval);
            setTimeout(function(){
-               console.log(el.offsetLeft);
-               console.log(sliders.length);
-               console.log(el.offsetLeft + (sliders.length * el.offsetWidth));
             el.style.left = el.offsetLeft + (sliders.length * el.offsetWidth) + "px";
-            moveLeft();
+            requestAnimationFrame(moveLeft);
         }, 5000);
-        }
+        } 
     }
     
 }, 10); 
 }
+
+
