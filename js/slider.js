@@ -7,12 +7,7 @@ function sliderInit(sliders){
      let header = document.getElementById("slider_container");
      div.id = "slider" + i;
      div.classList.add("slider");
-
-     div.style.left = (100*i) - 100 +"%";
-     div.style.position = "absolute";
-     div.style.width = 100 + "%";
-     div.style.height = 100 + "vh";
-     div.style.cssFloat = "left"; 
+     div.style.left = (100*i) - 100 +"vw";
        
      header.appendChild(div); 
  }
@@ -29,11 +24,9 @@ function moveLeft(time){
     for(let i = 1; i <=sliders.length; i++){
         el_left[i-1] = document.getElementById("slider" + i).offsetLeft;
     }
-   // console.log(el_left);
 
     let interval = setInterval( function() {
     let passed_time = (Date.now() - start_time) / 1000 ;
-    console.log(passed_time);
     if (passed_time > 1) passed_time = 1;   
     
     for(let i=1; i <= sliders.length; i++){
@@ -44,11 +37,26 @@ function moveLeft(time){
            setTimeout(function(){
             el.style.left = el.offsetLeft + (sliders.length * el.offsetWidth) + "px";
             requestAnimationFrame(moveLeft);
-        }, 5000);
+        }, 3000);
         } 
     }
-    
-}, 10); 
+  
+}, 5); 
+window.addEventListener("resize", test );
+
+function test(){
+
+      clearInterval(interval);
+      
+      for(let i = 1; i <= sliders.length; i++){
+          let el = document.getElementById("slider" + i);
+          console.log("RESIZZE");
+          //let el = document.getElementById("slider" + i);
+          el.style.left = (100*i) - 100 +"%";
+      } 
+  //  requestAnimationFrame(moveLeft);
+}
+
 }
 
 
